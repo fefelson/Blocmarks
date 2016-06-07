@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations'
   }
 
-  root 'welcome#index'
+  resources :topics
+
+  root 'topics#index'
 
 end

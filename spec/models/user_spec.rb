@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  describe "Associations" do
+    it { should have_many(:topics) }
+  end
+
   describe "Attributes" do
     it { should have_db_column(:name).of_type(:string) }
   end

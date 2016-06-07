@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   before_save -> { self.email = email.downcase }, if: -> { email.present? }
 
+  has_many :topics
+
   validates :name, uniqueness: { case_sensitive: false },
             presence: true,
             length: { minimum: 4, maximum: 26 }
