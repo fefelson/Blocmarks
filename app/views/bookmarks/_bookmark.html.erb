@@ -1,6 +1,7 @@
 <div class="col-md-3 bookmark">
   <div class="row">
-  <%= bookmark.url %>
+  <%= link_to bookmark.url, topic_bookmark_path(bookmark.topic, bookmark) %>
+
   </div>
   <div class="row">
     Like

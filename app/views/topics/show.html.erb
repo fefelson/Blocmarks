@@ -1,3 +1,5 @@
 <h1> <%= @topic.title %> </h1>
 
 <%= render @topic.bookmarks %>
+
+<%= link_to "New Bookmark", new_topic_bookmark_path(@topic.id), class: 'btn btn-success btn-lg' %>

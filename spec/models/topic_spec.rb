@@ -8,7 +8,7 @@ RSpec.describe Topic, type: :model do
 
   describe "Associations" do
     it { should belong_to(:user) }
-    it { should have_many(:bookmarks) }
+    it { should have_many(:bookmarks).dependent(:destroy) }
   end
 
   describe "Validations" do
