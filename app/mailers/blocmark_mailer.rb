@@ -1,0 +1,2 @@
+class BlocmarkMailer < ApplicationMailer
+end

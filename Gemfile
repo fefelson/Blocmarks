@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '4.2.6'   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'sqlite3'   # Use sqlite3 as the database for Active Record
 gem 'sass-rails', '~> 5.0'   # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0'   # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.1.0'   # Use CoffeeScript for .coffee assets and views
@@ -16,6 +15,10 @@ gem 'figaro', '1.0'   # Makes it easy to securly configure rails applications
 group :production do
   gem 'pg'   # The ruby interface to the PostgreSQL RDBMS
   gem 'rails_12factor'   # Enables serving assets in production and setting your logger to standard out
+end
+
+group :development do
+  gem 'sqlite3'   # Use sqlite3 as the database for Active Record
 end
 
 group :development, :test do
