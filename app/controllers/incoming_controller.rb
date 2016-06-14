@@ -15,7 +15,7 @@ class IncomingController < ApplicationController
       user.save!
     end
 
-    @user = User.find_by name: mail_user
+    @user = User.find_by email: mail_user
 
 
     mail_topic = params[:subject]
