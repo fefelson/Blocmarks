@@ -11,6 +11,15 @@
   user.save!
 end
 
+unless User.find_by(email: 'edwrdwalsh@gmail.com')
+  user = User.first
+  user.update_attributes!(
+    name: "FEFelson",
+    email: 'edwrdwalsh@gmail.com',
+    password: 'password'
+  )
+end
+
 users = User.all
 puts "#{users.count} users created."
 
