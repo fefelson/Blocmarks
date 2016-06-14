@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :bookmarks, except: [:index]
   end
 
-  post :incoming, to: 'incoming#create'
+  post '/incoming' => 'incoming#create', as: 'incoming'
 
   root 'topics#index'
 
