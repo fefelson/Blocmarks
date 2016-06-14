@@ -11,6 +11,7 @@ gem 'bootstrap-sass'   # Sass powered version of the bootstrap html, css, and ja
 gem 'pry'   # Powerful alternative to the standard interactive ruby shell
 gem 'devise'   # Flexible authentication solution
 gem 'figaro', '1.0'   # Makes it easy to securly configure rails applications
+gem 'faker'   # Adds random data for development and testing
 
 group :production do
   gem 'pg'   # The ruby interface to the PostgreSQL RDBMS
@@ -22,7 +23,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'faker'   # Adds random data for development and testing
   gem 'spring'   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'rspec-rails','~>3.0'   # A testing framework for rails
   gem 'shoulda-matchers','~>3.0'   # Provides RSpec one-liners that test common Rails functionality.

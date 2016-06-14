@@ -12,12 +12,13 @@
 end
 
 unless User.find_by(email: 'edwrdwalsh@gmail.com')
-  user = User.first
-  user.update_attributes!(
+  user = User.new(
     name: "FEFelson",
     email: 'edwrdwalsh@gmail.com',
     password: 'password'
   )
+  user.skip_confirmation!
+  user.save!
 end
 
 users = User.all
