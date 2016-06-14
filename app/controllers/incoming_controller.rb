@@ -4,8 +4,10 @@ class IncomingController < ApplicationController
 
   def create
 
-    mail_user = params[:user]
-    if !User.exists?(name: mail_user)
+    # binding.pry
+
+    mail_user = params[:sender]
+    if !User.exists?(email: mail_user)
       user = User.new(
         name: mail_user,
         email: mail_user,
