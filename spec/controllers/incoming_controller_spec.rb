@@ -35,6 +35,12 @@ RSpec.describe IncomingController, type: :controller do
       new_url = "new_url.test.com"
       expect{ post :create, { sender: my_user.email, subject: my_topic.title, "body-plain" => new_url }}.to change(Bookmark, :count).by(1)
     end
+
+    it "new bookmark with new user increases number of bookmarks by 1" do
+      new_url = "new_url.test.com"
+      new_email = "new_user@test.com"
+      expect{ post :create, { sender: new_email, subject: my_topic.title, "body-plain" => new_url }}.to change(Bookmark, :count).by(1)
+    end
   end
 
 end

@@ -7,29 +7,31 @@ class IncomingController < ApplicationController
     # binding.pry
 
     mail_user = params[:sender]
-    if !User.exists?(email: mail_user)
-      user = User.new(
+    @user = User.find_by email: mail_user
+    if !@user
+      @user = User.new(
         name: mail_user,
         email: mail_user,
         password: 'password'
       )
-      user.skip_confirmation!
-      user.save!
+      @user.skip_confirmation!
+      @user.save!
     end
 
-    @user = User.find_by email: mail_user
+
 
 
     mail_topic = params[:subject]
-    if !Topic.exists?(title: mail_topic)
-      topic = Topic.new(
+    @topic = Topic.find_by title: mail_topic
+
+    if !@topic
+      @topic = Topic.new(
         title: mail_topic,
         user: @user
       )
-    topic.save!
+    @topic.save!
     end
 
-    @topic = Topic.find_by title: mail_topic
 
 
 
