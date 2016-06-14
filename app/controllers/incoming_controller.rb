@@ -10,9 +10,14 @@ class IncomingController < ApplicationController
     mail_topic = params[:subject]
     @topic = Topic.find_by title: mail_topic
 
-    @bookmark = params["body-plain"]
+    mail_url = params["body-plain"]
 
-    redirect_to url_for("bookmark" => {"url" => @bookmark }, "topic_id" => @topic.id, "controller" => "bookmarks", "action" => "create")
+    @bookmark = Bookmark.new
+    @bookmark.topic = @topic
+    @bookmark.url = mail_url
+
+    @bookmark.save
+
     # You put the message-splitting and business
     # magic here.
      # Find the user by using params[:sender]
