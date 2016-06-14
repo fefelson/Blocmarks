@@ -4,7 +4,6 @@ class IncomingController < ApplicationController
 
   def create
 
-    # binding.pry
 
     mail_user = params[:sender]
     @user = User.find_by email: mail_user
