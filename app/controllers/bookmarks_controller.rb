@@ -12,7 +12,6 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    binding.pry
     @topic = Topic.find(params[:topic_id])
     @bookmark = Bookmark.new
     @bookmark = @topic.bookmarks.build(bookmark_params)
