@@ -5,32 +5,30 @@ class IncomingController < ApplicationController
   def create
 
     mail_user = params[:user]
-    @user = User.find_by name: mail_user
-    # if User.exists?(name: mail_user):
-    #   @user = User.find_by name: mail_user
-    # else
-    #   @user = User.new(
-    #     name: 'mail_user',
-    #     email: mail_user,
-    #     password: 'password'
-    #   )
-    #   @user.skip_confirmation!
-    #   @user.save!
-    # end
+    if !User.exists?(name: mail_user):
+      user = User.new(
+        name: mail_user,
+        email: mail_user,
+        password: 'password'
+      )
+      user.skip_confirmation!
+      user.save!
+    end
 
+    @user = User.find_by name: mail_user
 
 
     mail_topic = params[:subject]
+    if !Topic.exists?(title: mail_topic)
+      topic = Topic.new(
+        title: mail_topic,
+        user: @user
+      )
+    topic.save!
+    end
+
     @topic = Topic.find_by title: mail_topic
-  #   if Topic.exists?(title: mail_topic)
-  #     @topic = topic.find_by title: mail_topic
-  #   else
-  #     @topic = Topic.new(
-  #     title: mail_topic,
-  #     user: @user
-  #   )
-  #   @topic.save!
-  # end
+
 
 
 
