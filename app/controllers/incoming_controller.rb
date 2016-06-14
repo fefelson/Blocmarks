@@ -5,7 +5,7 @@ class IncomingController < ApplicationController
   def create
 
     mail_user = params[:user]
-    if !User.exists?(name: mail_user):
+    if !User.exists?(name: mail_user)
       user = User.new(
         name: mail_user,
         email: mail_user,
