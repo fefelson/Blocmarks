@@ -37,7 +37,7 @@ class IncomingController < ApplicationController
 
     @bookmark.save
 
-    
+
     head 200
   end
 
