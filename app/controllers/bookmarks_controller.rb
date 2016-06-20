@@ -1,6 +1,7 @@
 class BookmarksController < ApplicationController
 
   before_action :authenticate_user!, except: :show
+  skip_after_action :verify_authorized, only: [:new, :create, :show]
 
   def show
     @bookmark = Bookmark.find(params[:id])
@@ -15,6 +16,7 @@ class BookmarksController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @bookmark = Bookmark.new
     @bookmark = @topic.bookmarks.build(bookmark_params)
+    @bookmark.user = current_user
 
     if @bookmark.save
       flash[:notice] = "Bookmark was saved."
@@ -27,10 +29,12 @@ class BookmarksController < ApplicationController
 
   def edit
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
   end
 
   def update
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
     @bookmark.assign_attributes(bookmark_params)
 
     if @bookmark.save
@@ -44,6 +48,7 @@ class BookmarksController < ApplicationController
 
   def destroy
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
 
     if @bookmark.destroy
       flash[:notice] = "\"#{@bookmark.url}\" was deleted successfully."

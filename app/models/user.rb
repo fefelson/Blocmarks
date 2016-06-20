@@ -6,10 +6,11 @@ class User < ActiveRecord::Base
   before_save -> { self.email = email.downcase }, if: -> { email.present? }
 
   has_many :topics
+  has_many :bookmarks
 
   validates :name, uniqueness: { case_sensitive: false },
             presence: true,
-            length: { minimum: 4, maximum: 26 }
+            length: { minimum: 3, maximum: 26 }
 
   validates :email, uniqueness: { case_sensitive: false },
             presence: true,

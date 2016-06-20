@@ -1,5 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
+  skip_after_action :verify_authorized
+
   def new
     @user = User.new
   end

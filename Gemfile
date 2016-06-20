@@ -12,7 +12,7 @@ gem 'pry'   # Powerful alternative to the standard interactive ruby shell
 gem 'devise'   # Flexible authentication solution
 gem 'figaro', '1.0'   # Makes it easy to securly configure rails applications
 gem 'faker'   # Adds random data for development and testing
-
+gem 'pundit'   # Set of helpers to provide a simple, robust and scaleable authorization system
 group :production do
   gem 'pg'   # The ruby interface to the PostgreSQL RDBMS
   gem 'rails_12factor'   # Enables serving assets in production and setting your logger to standard out

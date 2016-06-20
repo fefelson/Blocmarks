@@ -1,0 +1,5 @@
+
+
+class BookmarkPolicy < ApplicationPolicy
+
+end
