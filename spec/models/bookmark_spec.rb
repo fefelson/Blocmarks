@@ -5,6 +5,7 @@ RSpec.describe Bookmark, type: :model do
   describe "Associations" do
     it { should belong_to(:topic) }
     it { should belong_to(:user) }
+    it { should have_many(:likes).dependent(:destroy) }
   end
 
   describe "Attributes" do

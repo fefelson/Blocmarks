@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
   describe "Associations" do
     it { should have_many(:topics) }
     it { should have_many(:bookmarks) }
+    it { should have_many(:likes) }
   end
 
   describe "Attributes" do
@@ -24,6 +25,26 @@ RSpec.describe User, type: :model do
     # Password
     it { should validate_presence_of(:password)}
     it { should validate_length_of(:password).is_at_least(6)}
+  end
+
+  describe "#liked(bookmark)" do
+    before do
+      @user = User.create!(name: "User", email: "user@blocmarks.com", password: "password")
+      # @user.skip_confirmation!
+      @other_user = User.create!(name: "Other_User", email: "other_user@blocmarks.com", password: "password")
+      # @other_user.skip_confirmation!
+      @topic = Topic.create!(title: "New Topic", user: @other_user)
+      @bookmark = Bookmark.create!(url: "url.bookmark.com", user: @other_user, topic: @topic)
+    end
+
+    it "returns nil if user has not liked the bookmark" do
+      expect(@user.liked(@bookmark)).to be_nil
+    end
+
+    it "returns the appropriate like if it exists" do
+      like = @user.likes.where(bookmark: @bookmark).create
+      expect(@user.liked(@bookmark)).to eq(like)
+    end
   end
 
 end

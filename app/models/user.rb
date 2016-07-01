@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :topics
   has_many :bookmarks
+  has_many :likes, dependent: :destroy
 
   validates :name, uniqueness: { case_sensitive: false },
             presence: true,
@@ -16,5 +17,8 @@ class User < ActiveRecord::Base
             presence: true,
             length: { minimum: 3 }
 
+  def liked(bookmark)
+    likes.where(bookmark_id: bookmark.id).first
+  end
 
 end
