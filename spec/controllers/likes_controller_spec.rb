@@ -5,8 +5,9 @@ RSpec.describe LikesController, type: :controller do
   let(:my_user) { create(:user) }
   let(:other_user) { create(:user, name: 'other_user', email: 'other_user@email.com')}
   let(:my_topic) { create(:topic, user: my_user) }
-  let(:bookmark) { create(:bookmark, topic: my_topic, user: other_user) }
-  let!(:like) { create(:like, user:my_user, bookmark: bookmark) }
+  let(:liked_bookmark) { create(:bookmark, topic: my_topic, user: other_user) }
+  let(:bookmark) { create(:bookmark, topic: my_topic, user: my_user) }
+  let!(:like) { create(:like, user:my_user, bookmark: liked_bookmark) }
 
   before do
     my_user.confirm
@@ -24,11 +25,15 @@ RSpec.describe LikesController, type: :controller do
       expect(response).to render_template :index
     end
 
-    it "assigns all likes to @likes" do
+    it "assigns all liked bookmarks to @bookmarks" do
       get :index
-      expect(assigns(:likes)).to eq [like]
+      expect(assigns(:bookmarks)).to eq [liked_bookmark]
     end
 
+    it "doesnt assign bookmarks that weren't liked" do
+      get :index
+      expect(assigns(:bookmarks)).not_to include(bookmark)
+    end
   end
 
   describe 'POST #create' do
@@ -45,9 +50,9 @@ RSpec.describe LikesController, type: :controller do
     describe 'DELETE #destroy' do
       it 'destroys the like for the current user and bookmark' do
         request.env["HTTP_REFERER"] = topic_path(my_topic)
-        expect( my_user.likes.find_by_bookmark_id(bookmark.id) ).not_to be_nil
-        delete :destroy, { bookmark_id: bookmark.id, id: like.id }
-        expect( my_user.likes.find_by_bookmark_id(bookmark.id) ).to be_nil
+        expect( my_user.likes.find_by_bookmark_id(liked_bookmark.id) ).not_to be_nil
+        delete :destroy, { bookmark_id: liked_bookmark.id, id: like.id }
+        expect( my_user.likes.find_by_bookmark_id(liked_bookmark.id) ).to be_nil
       end
     end
 

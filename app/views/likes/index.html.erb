@@ -1,17 +1,17 @@
 <h1>Likes#index</h1>
 
-<% @likes.each do |like| %>
+<% @bookmarks.each do |bookmark| %>
   <div class="media">
     <div class="media-body">
-      <%= link_to like.bookmark.topic.title, topic_path(like.bookmark.topic) %>
+      <%= link_to bookmark.topic.title, topic_path(bookmark.topic) %>
       <div class="row">
-        <%= link_to like.bookmark.url, topic_bookmark_path(like.bookmark.topic, like.bookmark) %>
+        <%= link_to bookmark.url, topic_bookmark_path(bookmark.topic, bookmark) %>
         <small>
-          <%= like.user.name %> liked <%= time_ago_in_words(like.created_at) %> ago
+          <%= bookmark.getLike.user.name %> liked <%= time_ago_in_words(bookmark.getLike.created_at) %> ago
         </small>
       </div>
       <div class="row">
-        <%= render partial: 'likes/like', locals: { bookmark: like.bookmark } %>
+        <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
       </div>
 
     </div>

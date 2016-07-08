@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:topics) }
     it { should have_many(:bookmarks) }
     it { should have_many(:likes) }
+    it { should have_many(:liked_bookmarks).through(:likes).source(:bookmark) }
   end
 
   describe "Attributes" do

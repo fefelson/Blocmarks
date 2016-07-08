@@ -4,6 +4,10 @@
 
   </div>
   <div class="row">
-    <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
+    <% if bookmark.user == current_user %>
+      <%= link_to "Remove", [bookmark.topic, bookmark], class: 'btn btn-danger', method: :delete %>
+    <% else %>
+      <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
+    <% end %>
   </div>
 </div>

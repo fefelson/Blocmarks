@@ -49,4 +49,11 @@ end
 bookmarks = Bookmark.all
 puts "#{bookmarks.count} bookmarks created."
 
+40.times do |i|
+  like = Like.create!(
+    bookmark: bookmarks.sample,
+    user: users.sample
+  )
+end
+
 puts "Seed finished"
