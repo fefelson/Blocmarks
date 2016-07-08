@@ -4,7 +4,7 @@ class LikesController < ApplicationController
   skip_after_action :verify_authorized, except: [:create, :destroy]
 
   def index
-    @bookmarks = Bookmark.joins(:likes).distinct
+    @bookmarks = Bookmark.joins(:likes).group("bookmarks.url").order("likes.created_at DESC").distinct
   end
 
   def create

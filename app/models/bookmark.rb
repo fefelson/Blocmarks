@@ -9,7 +9,7 @@ class Bookmark < ActiveRecord::Base
   validates :url, presence: true
 
   def getLike
-    Like.where(bookmark: self).first
+    Like.where(bookmark: self).last
   end
 
 end
