@@ -3,8 +3,12 @@
     <div class="media-body">
       <h4 class="media-heading">
         <%= link_to topic.title, topic_path(topic) %>
-        <%= link_to "Edit", edit_topic_path(topic), class: 'btn btn-success btn-xs' %>
-        <%= link_to "Delete", topic, method: :delete, class: 'btn btn-danger btn-xs', data: {confirm: 'Are you sure you want to delete this topic?'} %>
+        <% if policy(topic).edit? %>
+          <%= link_to "Edit", edit_topic_path(topic), class: 'btn btn-success btn-xs' %>
+        <% end %>
+        <% if policy(topic).destroy? %>
+          <%= link_to "Delete", topic, method: :delete, class: 'btn btn-danger btn-xs', data: {confirm: 'Are you sure you want to delete this topic?'} %>
+        <% end %>
       </h4>
 
 

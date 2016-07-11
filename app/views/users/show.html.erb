@@ -1,8 +1,38 @@
 <div class="row">
   <h1>My Blocmarks</h1>
-  <%= render @bookmarks %>
+  <% @topics.each do |topic| %>
+    <% if !topic.bookmarks.favorite_bookmarks(current_user).empty? %>
+      <div class="row">
+        <div class="media">
+          <div class="media-body">
+            <h5 class="media-heading">
+              <%= link_to topic.title, topic_path(topic) %>
+            </h5>
+            <% topic.bookmarks.favorite_bookmarks(current_user).all.each do |bookmark| %>
+              <%= render partial: 'bookmarks/bookmark', locals: { bookmark: bookmark } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
 </div>
 <div class="row">
   <h1>Liked Blocmarks</h1>
-<%= render @liked_bookmarks %>
+  <% @topics.each do |topic| %>
+    <% if !topic.bookmarks.liked_bookmarks(current_user).empty? %>
+    <div class="row">
+      <div class="media">
+        <div class="media-body">
+          <h5 class="media-heading">
+            <%= link_to topic.title, topic_path(topic) %>
+          </h5>
+          <% topic.bookmarks.liked_bookmarks(current_user).all.each do |bookmark| %>
+            <%= render partial: 'bookmarks/bookmark', locals: { bookmark: bookmark } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
 </div>

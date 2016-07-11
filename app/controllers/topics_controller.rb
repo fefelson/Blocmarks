@@ -1,8 +1,8 @@
 class TopicsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
-  skip_after_action :verify_authorized
-  
+  skip_after_action :verify_authorized, except: [:edit, :update, :destroy]
+
   def index
     @topics = Topic.all
   end
@@ -29,10 +29,12 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
+    authorize @topic
   end
 
   def update
     @topic = Topic.find(params[:id])
+    authorize @topic
     @topic.assign_attributes(topic_params)
 
     if @topic.save
@@ -45,6 +47,7 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.find(params[:id])
+    authorize @topic
 
     if @topic.destroy
       flash[:notice] = "\"#{@topic.title}\" was deleted successfully."
